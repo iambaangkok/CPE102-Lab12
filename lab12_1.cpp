@@ -17,3 +17,28 @@ int main(){
     cout << "\nMin = " << B[5];
     return 0;
 }
+
+void stat(const double source[],int N,double dest[]){
+    dest[0] = dest[1] = dest[3] = 0 ;
+    dest[2] = 1;
+    dest[4] = -1e9;
+    dest[5] = 1e9;
+    for(int i = 0 ; i < N;++i){
+        dest[0] += source[i];
+        dest[1] += pow(source[i],2);
+        dest[2] *= source[i];
+        dest[3] += 1/source[i];
+        if(source[i] > dest[4]){
+            dest[4] = source[i];
+        }
+        if(source[i] < dest[5]){
+            dest[5] = source[i];
+        }
+    }
+    dest[0] /= N;
+    dest[1] = sqrt(dest[1]/N - pow(dest[0],2));
+    dest[2] = pow(dest[2],1.0/N);
+    dest[3] = N/dest[3];
+
+    return;
+}
